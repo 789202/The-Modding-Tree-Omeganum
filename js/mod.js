@@ -42,6 +42,15 @@ function getPointGen() {
 		return new ExpantaNum(0)
 
 	let gain = new ExpantaNum(1)
+	if (hasUpgrade('p', 11)) gain = gain.times(10)
+	if (hasUpgrade('p', 13)) gain = gain.times(upgradeEffect('p', 13))
+	if (hasUpgrade('p', 14)) gain = gain.add(player.points)
+	if (hasUpgrade('p', 15)) gain = gain.times(upgradeEffect('p', 15))
+	if (ExpantaNum.gte(player.points,4294967296)) {
+		gain=gain.logBase(2).arrow(1)(6.4)
+		if (hasUpgrade('p', 21)) gain = gain.times(gain.logBase(2).arrow(1)(upgradeEffect('p', 21)))
+		if (hasUpgrade('p', 23)) gain = gain.times(gain.logBase(2).arrow(1)(6.9))
+	}
 	return gain
 }
 
