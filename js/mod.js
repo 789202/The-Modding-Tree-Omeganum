@@ -46,11 +46,26 @@ function getPointGen() {
 	if (hasUpgrade('p', 13)) gain = gain.times(upgradeEffect('p', 13))
 	if (hasUpgrade('p', 14)) gain = gain.add(player.points)
 	if (hasUpgrade('p', 15)) gain = gain.times(upgradeEffect('p', 15))
-	if (ExpantaNum.gte(player.points,4294967296)) {
+	if (ExpantaNum.gte(player.points,4294967296)&&!hasUpgrade('p', 31)) {
 		gain=gain.logBase(2).arrow(1)(6.4)
 		if (hasUpgrade('p', 21)) gain = gain.times(gain.logBase(2).arrow(1)(upgradeEffect('p', 21)))
 		if (hasUpgrade('p', 23)) gain = gain.times(gain.logBase(2).arrow(1)(6.9))
 	}
+	if (hasUpgrade('p', 25)) gain = gain.arrow(1)(upgradeEffect('p', 25))
+	if (hasUpgrade('p', 26)) gain = gain.times(ExpantaNum("1e107"))
+	if (hasUpgrade('p', 31)) gain = gain.add(player.points.times(player.points.add(2).logBase(2)))
+	if (hasUpgrade('p', 32)) {gain = 1
+		gain=player.points.add(1).arrow(1)(1e100)}
+	if (hasUpgrade('p', 33)) {
+		gain=player.points.arrow(1)(player.points.add(1).logBase(2))
+	}
+	if (hasUpgrade('p', 34)) {
+		gain=player.points.arrow(2)(1.001)
+	}
+	if (hasUpgrade('p', 35)) gain = player.points.arrow(2)(player.points.add(2).slog(2).add(1).slog(1.5))
+	if (hasUpgrade('p', 36)) gain = player.points.arrow(2)(player.points.add(2).slog(2))
+	if (hasUpgrade('E', 11)) gain = gain.times(player.points.add(1).arrow(1)(2))
+	if (hasUpgrade('E', 12)) gain = gain.times(player.points.add(1).arrow(1)(player.E.points.add(1)))
 	return gain
 }
 
